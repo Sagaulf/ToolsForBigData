@@ -1,0 +1,25 @@
+#!/usr/bin/python
+
+# mapreduce job that counts the occurrences of 
+# each word in a text file
+import sys
+
+
+# Map the text by returning a list of key-value pairs
+def map_words(input_key, input_value):
+	
+	lines = (f.lower()).split()
+	# Retmove punctuation & such
+	#***************************
+	# Returns list tuples, (word, 1)
+	return [(word,1) for word in lines]
+
+# Group by keys
+def reducer(intermediate_key,intermediate_value_list):
+  return (intermediate_key,sum(intermediate_value_list))
+
+
+f = open('shakespeare.txt', 'r')
+corpus = f.read()
+f.close
+print map_reduce.map_reduce(corpus,map_words,reducer)
